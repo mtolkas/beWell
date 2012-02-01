@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Social" actionBarVisible="false" currentState="Normal">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	
+	<fx:Script>
+		<![CDATA[
+			protected function BackButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.popView();
+			}
+			
+//			protected function CheckInButton_clickHandler(event:MouseEvent):void
+//			{
+//				// TODO Auto-generated method stub				
+//				currentState = "Draft2";
+//			}
+			
+//			protected function StatusButton_clickHandler(event:MouseEvent):void
+//			{
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+			protected function cloud_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				currentState = "cloud";
+				CheckInCallOut.closeDropDown();			
+			}
+			
+			protected function umbrella_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				currentState = "umbrella";
+				CheckInCallOut.closeDropDown();
+			}
+			
+			protected function duck_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				currentState = "duck";
+				CheckInCallOut.closeDropDown();
+			}
+			
+			protected function april_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				currentState = "april";
+				CheckInCallOut.closeDropDown();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="Normal" />
+		
+		<s:State name="cloud" />
+		<s:State name="umbrella" />
+		<s:State name="duck" />
+		<s:State name="april" />
+	</s:states>
+	
+	<s:Image id="SocialBackground" includeIn="Normal" x="0" y="0" source="@Embed('assets/images/screen-social-draft1.jpg')"/>
+	
+	<s:Image id="CloudBack" includeIn="cloud" x="0" y="0" source="@Embed('assets/SocialView/social-page1.jpg')"/>
+	<s:Image id="UmbrellaBack" includeIn="umbrella" x="0" y="0" source="@Embed('assets/SocialView/social-page2.jpg')"/>
+	<s:Image id="DuckBack" includeIn="duck" x="0" y="0" source="@Embed('assets/SocialView/social-page3.jpg')"/>
+	<s:Image id="AprilBack" includeIn="april" x="0" y="0" source="@Embed('assets/SocialView/social-page4.jpg')"/>
+	
+	<s:Image id="BackButton" x="32" y="17" source="assets/images/Back-button.png" click="BackButton_clickHandler(event)"/>
+	<s:Image id="CheckInButton" x="77" y="673" source="assets/images/button-checkin.png" />
+	<s:Image id="StatusButton" x="327" y="673" source="assets/images/button-status.png" />
+	<s:Image id="PostcardButton" x="523" y="673" source="assets/images/button-postcard.png"/>
+	
+	
+	<s:CalloutButton id="CheckInCallOut" x="878" y="382" width="134" height="111" label="Add Photo"
+					 alpha="0" calloutDestructionPolicy="never" horizontalPosition="after"
+					 x.cloud="77" y.cloud="673" width.cloud="242" height.cloud="47"
+					 x.umbrella="77" y.umbrella="673" width.umbrella="242" height.umbrella="47"
+					 x.duck="77" y.duck="673" width.duck="242" height.duck="47"
+					 x.Normal="77" y.Normal="673" width.Normal="242" height.Normal="47"
+					 x.april="77" y.april="673" width.april="242" height.april="47">
+		<s:calloutLayout>
+			<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" horizontalAlign="center" gap="5"/>
+		</s:calloutLayout>
+		<s:calloutContent>
+			<s:Image id="cloud" source="@Embed('assets/SocialView/social-mini1.jpg')" click="cloud_clickHandler(event)"/>
+			<s:Image id="umbrella" source="@Embed('assets/SocialView/social-mini2.jpg')" click="umbrella_clickHandler(event)"/>
+			<s:Image id="duck" source="@Embed('assets/SocialView/social-mini3.jpg')" click="duck_clickHandler(event)"/>
+			<s:Image id="april" source="@Embed('assets/SocialView/social-mini4.jpg')" click="april_clickHandler(event)"/>		
+		</s:calloutContent>
+	</s:CalloutButton>	
+</s:View>
+
+<!--
+
+<s:Image id="nap" source="@Embed('assets/SocialView/social-mini5.jpg')"/>
+<s:Image id="minute" source="@Embed('assets/SocialView/social-mini6.jpg')"/>
+<s:Image id="fog" source="@Embed('assets/SocialView/social-mini7.jpg')"/>	
+-->

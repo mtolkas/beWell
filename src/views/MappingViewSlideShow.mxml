@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:s="library://ns.adobe.com/flex/spark" title="MappingViewSlideShow" creationComplete="init()" destructionPolicy="never" actionBarVisible="false">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
+		<s:Fade id="fadeEffect" target="{img}" alphaFrom="0" alphaTo="1"
+				repeatCount="2" repeatBehavior="reverse" duration="1000" repeatDelay="2000"/>
+		
+	</fx:Declarations>	
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.effects.Fade;			
+			import views.Categories.EmotionalView;
+			import views.Categories.IntelectualView;
+			import views.Categories.NutritionView;
+			import views.Categories.PhysicalView;
+			import views.Categories.SocialView;
+			
+			private var index:int = 0; //Used for Changing Images			
+			
+			public var GoalsArray:Array = new Array();
+			
+			//public var ButtonUpLeftView:Class = new Class();
+			
+			private function init():void
+			{			
+				//img.setStyle("completeEffect", Fade);
+				
+				ArrangeLabels();
+				
+				fadeEffect.play();	
+				img.source = data.Goal1ImageURL;
+				
+				index ++;
+				
+				var timer:Timer = new Timer(4000);
+				timer.addEventListener(TimerEvent.TIMER,changeImage);
+				timer.start();
+			}			
+			private function changeImage(e:TimerEvent):void
+			{				
+				fadeEffect.play();
+				
+				if (index==0)
+				{
+					img.source = data.Goal1ImageURL;					
+					index++;
+				}					
+				else if (index==1)					
+				{
+					img.source = data.Goal2ImageURL;					
+					index++;
+				}
+				else if (index==2)
+				{
+					img.source = data.Goal3ImageURL;					
+					index=0;
+				}				
+			}
+			
+			public function ArrangeLabels():void
+			{
+				GoalsArray.push( {Title:"Physical", IconSource:"assets/images/icon-physical.png", View:views.Categories.PhysicalView, Value:data.Goal1Data['Phy'] + data.Goal2Data['Phy'] + data.Goal3Data['Phy'] } );
+				GoalsArray.push( {Title:"Emotional", IconSource:"assets/images/icon-emotional.png", View:views.Categories.EmotionalView, Value:data.Goal1Data['Emo'] + data.Goal2Data['Emo'] + data.Goal3Data['Emo'] } );
+				GoalsArray.push( {Title:"Social", IconSource:"assets/images/icon-social.png", View:views.Categories.SocialView, Value: data.Goal1Data['Soc'] + data.Goal2Data['Soc'] + data.Goal3Data['Soc'] } );
+				GoalsArray.push( {Title:"Nutrition", IconSource:"assets/images/icon-nutrition.png", View:views.Categories.NutritionView, Value:data.Goal1Data['Nut'] + data.Goal2Data['Nut'] + data.Goal3Data['Nut'] } );
+				GoalsArray.push( {Title:"Intellectual", IconSource:"assets/images/icon-intellectual.png", View:views.Categories.IntelectualView, Value:data.Goal1Data['Int'] + data.Goal2Data['Int'] + data.Goal3Data['Int'] } );
+				
+				GoalsArray.sortOn( "Value", Array.NUMERIC);
+				GoalsArray.reverse();
+				
+				//Change Icon order
+				UpLeftIcon.source = GoalsArray[0].IconSource;
+				UpRightIcon.source = GoalsArray[1].IconSource;
+				DownLeftIcon.source = GoalsArray[2].IconSource;
+				DownMiddleIcon.source = GoalsArray[3].IconSource;
+				DownRightIcon.source = GoalsArray[4].IconSource;
+				
+				
+				//Change the labels depending on the order
+				//				UpLeftLabel.text = GoalsArray[0].Title;
+				//				UpRightLabel.text = GoalsArray[1].Title;
+				//				DownLeftLabel.text = GoalsArray[2].Title;
+				//				DownMiddleLabel.text = GoalsArray[3].Title;
+				//				DownRightLabel.text = GoalsArray[4].Title;		
+				
+				//Assign the Views to the Labels/buttons
+				//ButtonUpLeftView = GoalsArray[0].View as Class;
+				
+				//Goal1Val.text = GoalsArray[0].Value;
+				//Goal2Val.text = GoalsArray[1].Value;
+				
+				//				var GoalsOrder:Object = new Object(); //Object to carry the final Goal Order 
+				//				GoalsOrder.Physical = data.Goal1Data['Phy'] + data.Goal2Data['Phy'] + data.Goal3Data['Phy']; //Get the sum of Physical metric of all goals
+				
+			}			
+			
+			protected function UpLeftLabel_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(GoalsArray[0].View);
+			}
+			
+			protected function UpRightLabel_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(GoalsArray[1].View);
+			}
+			
+			protected function DownLeftLabel_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(GoalsArray[2].View);
+			}
+			
+			protected function DownRightLabel_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(GoalsArray[3].View);
+			}
+			
+			protected function DownMiddleLabel_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(GoalsArray[4].View);
+			}
+			
+			protected function EditGoalsButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.popView();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	
+	
+	<s:Image id="MosaicBehind" x="0" y="0" source="assets/images/mosaic-behind.png"/>
+	<s:Image id="img" x="87" y="31" width="695" height="695" alpha="0" scaleMode="zoom"/>
+
+	<s:Image id="MosaicImage" x="0" y="0" alpha="1" source="@Embed(source='/assets/images/mosaic-mask_logo.png')"/>
+	
+	<s:Group x="61" y="0">		
+		
+		<!-- Icons -->
+		<s:Image id="UpLeftIcon" x="49" y="45" width="130" height="130" click="UpLeftLabel_clickHandler(event)"/>
+		<s:Image id="UpRightIcon" x="568" y="45" width="130" height="130" click="UpRightLabel_clickHandler(event)"/>
+		<s:Image id="DownLeftIcon" x="49" y="509" width="130" height="130" click="DownLeftLabel_clickHandler(event)"/>
+		<s:Image id="DownMiddleIcon" x="305" y="507" width="130" height="130" click="DownRightLabel_clickHandler(event)"/>
+		<s:Image id="DownRightIcon" x="568" y="507" width="130" height="130" click="DownMiddleLabel_clickHandler(event)"/>		
+	</s:Group>
+	
+	<s:Image id="EditGoalsButton" x="1028" y="673" source="assets/images/button-EditGoals.png" click="EditGoalsButton_clickHandler(event)"/>
+	
+	
+	<!--	<s:Label id="UpLeftLabel" x="49" y="41" width="408" height="70" text="Up Left" fontSize="25" color="white"
+	click="UpLeftLabel_clickHandler(event)"/>	
+	<s:Label id="UpRightLabel" x="698" y="35" text="Up Right" width="400" height="87" rotation="90" fontSize="25" color="white"
+	click="UpRightLabel_clickHandler(event)"/>	
+	<s:Label id="DownLeftLabel" x="43" y="486" width="183" height="47" text="Down Left" fontSize="25" color="white"
+	click="DownLeftLabel_clickHandler(event)"/>
+	<s:Label id="DownRightLabel" x="510" y="486" width="188" height="47" text="Down Right" fontSize="25" color="white"
+	click="DownRightLabel_clickHandler(event)"/>
+	<s:Label id="DownMiddleLabel" x="273" y="486" width="200" height="47" text="Down Middle" fontSize="25" color="white"
+	click="DownMiddleLabel_clickHandler(event)"/> -->
+	
+	
+	
+	
+	<!--	<s:Label id="Goal1" x="825" y="79" width="54" height="25" text="Goal1"/>
+	<s:Label id="Goal1Val" x="959" y="79" width="67" height="25" text="Goal1Val"/>
+	<s:Label id="Goal2" x="818" y="165" width="103" height="34" text="Goal2"/>
+	<s:Label id="Goal2Val" x="959" y="165" width="67" height="19" text="Goal2Val"/> -->
+	
+	
+</s:View>

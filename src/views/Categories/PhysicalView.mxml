@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="MeterBackground" actionBarVisible="false" xmlns:components="components.*" initialize="view1_initializeHandler(event)" destructionPolicy="never">	
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
+		<s:ArrayCollection id="HealthMeterImagesArray">
+			<fx:Object id="MeterImage0" source="@Embed('assets/HealthMeter/HealthMeter0.png')"/>
+			<fx:Object id="MeterImage1" source="@Embed('assets/HealthMeter/HealthMeter1.png')"/>
+			<fx:Object id="MeterImage2" source="@Embed('assets/HealthMeter/HealthMeter2.png')"/>
+			<fx:Object id="MeterImage3" source="@Embed('assets/HealthMeter/HealthMeter3.png')"/>
+			<fx:Object id="MeterImage4" source="@Embed('assets/HealthMeter/HealthMeter4.png')"/>
+			<fx:Object id="MeterImage5" source="@Embed('assets/HealthMeter/HealthMeter5.png')"/>
+			<fx:Object id="MeterImage6" source="@Embed('assets/HealthMeter/HealthMeter6.png')"/>
+			<fx:Object id="MeterImage7" source="@Embed('assets/HealthMeter/HealthMeter7.png')"/>
+			<fx:Object id="MeterImage8" source="@Embed('assets/HealthMeter/HealthMeter8.png')"/>
+			<fx:Object id="MeterImage9" source="@Embed('assets/HealthMeter/HealthMeter9.png')"/>
+			<fx:Object id="MeterImage10" source="@Embed('assets/HealthMeter/HealthMeter10.png')"/>
+		</s:ArrayCollection>		
+		
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import views.MappingViewSlideShow;
+			public var ImageIndex:int = 0;
+			public var timer:Timer = new Timer(1000,0);
+			
+			protected function view1_initializeHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				MeterImage.source = HealthMeterImagesArray.getItemAt(ImageIndex)['source'];
+				
+			}
+			
+			private function NeedleDown(e:TimerEvent):void
+			{	
+				if (ImageIndex == 0) 
+					timer.stop();
+				else
+				MeterImage.source = HealthMeterImagesArray.getItemAt(ImageIndex - 1)['source'];
+				ImageIndex = ImageIndex - 1;
+
+			}
+			
+			protected function LowButton_clickHandler(event:MouseEvent):void
+			{
+				ImageIndex = ImageIndex + 3;
+				if (ImageIndex > 10) //Max the meter to 10
+				{
+					ImageIndex = 10;
+					MeterImage.source = HealthMeterImagesArray.getItemAt(10)['source'];
+				}
+				else
+				{
+					MeterImage.source = HealthMeterImagesArray.getItemAt(ImageIndex)['source'];
+				}
+				
+				timer.addEventListener(TimerEvent.TIMER,NeedleDown);
+				timer.start();
+			}
+			
+			protected function ModerateButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				ImageIndex = ImageIndex + 5;
+				if (ImageIndex > 10) //Max the meter to 10
+				{
+					ImageIndex = 10;
+					MeterImage.source = HealthMeterImagesArray.getItemAt(10)['source'];
+				}
+				else
+					MeterImage.source = HealthMeterImagesArray.getItemAt(ImageIndex)['source'];
+				
+				timer.addEventListener(TimerEvent.TIMER,NeedleDown);
+				timer.start();
+			}
+			
+			protected function HardButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				ImageIndex = ImageIndex + 7;
+				if (ImageIndex > 10)
+				{
+					ImageIndex = 10;
+					MeterImage.source = HealthMeterImagesArray.getItemAt(10)['source'];
+				}
+				else
+					MeterImage.source = HealthMeterImagesArray.getItemAt(ImageIndex)['source'];
+				
+				timer.addEventListener(TimerEvent.TIMER,NeedleDown);
+				timer.start();
+			}
+			
+			protected function BackButton_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.popView();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Image id="PhysicalBackgroundImage" x="0" y="0" source="assets/images/page-physical_ed.jpg"/>
+	<s:Image id="BackButton" x="30" y="18" source="assets/images/Back-button.png" click="BackButton_clickHandler(event)"/>
+	
+	<s:Image id="MeterImage" x="613" y="193" source="assets/HealthMeter/HealthMeter0.png"/>
+	<s:Image id="MeterLogNewImage" x="654" y="647" source="assets/HealthMeter/Button-LogNew.png"/>
+	<s:Image id="MeterHistoryButton" x="967" y="646" source="assets/HealthMeter/Button-History.png"/>
+	<s:Group id="MeterImagesGroup" x="613" y="156" width="726" height="598">		
+		<s:CalloutButton id="MeterLogNewButton" x="42" y="495" width="274" alpha="0">
+			<s:calloutLayout>
+				<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" horizontalAlign="center" gap="5"/>
+			</s:calloutLayout>
+			<s:calloutContent>
+				<s:Button id="LowButton" label="Low" width="200"
+						  click="LowButton_clickHandler(event)"/>
+				<s:Button id="ModerateButton" label="Moderate" width="200"
+						  click="ModerateButton_clickHandler(event)"/>
+				<s:Button id="HardButton" label="Hard" width="200"
+						  click="HardButton_clickHandler(event)"/>
+			</s:calloutContent>
+		</s:CalloutButton>		
+	</s:Group>
+	<s:Image id="WidgetsPhysical" x="72" y="245" source="assets/images/widgets-physical.png"/>
+	
+	
+	
+	
+	<!-- <s:Image id="PhysicalViewBackGround" x="-14" y="-16" source="assets/images/page-physical.jpg"/> -->
+	
+	
+</s:View>
+

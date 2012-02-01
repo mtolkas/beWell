@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+								  xmlns:s="library://ns.adobe.com/flex/spark" applicationDPI="160" 
+								  firstView="views.FirstView" splashScreenImage="@Embed('assets/images/mosaic-home_logo.jpg')" splashScreenMinimumDisplayTime="2000">
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+
+	</fx:Declarations>	
+	
+
+</s:ViewNavigatorApplication>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" xmlns:icons="assets.GoalIcons.*" title="Goals" destructionPolicy="never" actionBarVisible="false">
+	
+	<fx:Script>
+		<![CDATA[
+			
+			protected function Goal1_Pic_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(views.ChooseGoalsView);
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+
+	</fx:Declarations>
+	
+	<s:BitmapImage source="@Embed('assets/images/mosaic-home_logo.jpg')" />
+	
+	<s:Group id="GoalsViewPictureGroup" left="10" right="10" top="16" bottom="10">		
+		
+		<!-- <icons:Splash_Screen_Vector_Native id="Goal1_Pic" y="10" left="14" width="443" height="265" click="Goal1_Pic_clickHandler(event)"/> -->
+		
+		<s:Image id="GetStartedButton" x="973" y="624" source="assets/images/button-getstarted.png" click="Goal1_Pic_clickHandler(event)"/>
+
+	</s:Group>
+
+	
+</s:View>
+
+<!--
+<s:Image id="Goal1Pic" x="10" y="22" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')"/>
+<s:Image id="Goal2Pic" x="11" y="232" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')"/>
+<s:Image id="Goal3Pic" x="10" y="442" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')"/>
+<s:Image id="Goal4Pic" x="244" y="22" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')" alpha="0.8" />
+<s:Image id="Goal5Pic" x="245" y="232" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')" alpha="0.8" />
+<s:Image id="Goal6Pic" x="244" y="442" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')" alpha="0.8" />
+<s:Image id="Goal7" x="474" y="24" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')" alpha="0.6" />
+<s:Image id="Goal8" x="474" y="232" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')" alpha="0.6" />
+<s:Image id="Goal9Pic" x="474" y="442" click="Goal1_Pic_clickHandler(event)"
+source="@Embed(source='/assets/GoalIcons/GreenSquare200px.jpg')" alpha="0.6" />
+-->

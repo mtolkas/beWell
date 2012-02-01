@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Choose Goals" initialize="view1_initializeHandler(event)" destructionPolicy="never" xmlns:components="components.*" actionBarVisible="false">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->		
+		<components:GoalDataArrays id="GoalData" />
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import components.GoalDataArrays;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			protected var roll:CameraRoll;
+			protected var myCam:CameraUI;
+			
+			public var GoalsObject:Object = new Object(); //Object to carry the Goal Data to the next View
+			
+			
+			protected function view1_initializeHandler(event:FlexEvent):void
+			{	
+				currentState = "Normal";
+				
+				//initial data for the spinner list to avoid Null reference
+				GoalsObject.Goal1ImageURL = "assets/images/AddPicPrompt.png";
+				GoalsObject.Goal2ImageURL = "assets/images/AddPicPrompt.png";
+				GoalsObject.Goal3ImageURL = "assets/images/AddPicPrompt.png";
+			}
+			
+			protected function Goal1PictureLibraryBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (CameraRoll.supportsBrowseForImage)
+				{					
+					roll = new CameraRoll();
+					roll.addEventListener(MediaEvent.SELECT,onMediaSelectPic1);
+					Goal1PictureLibraryBtn.addEventListener(MouseEvent.CLICK,onBrowse);   
+					
+				} 
+				else currentState = "CameraNotSupported";
+			}			
+			protected function Goal1PictureCameraBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (CameraUI.isSupported){
+					myCam = new CameraUI();
+					myCam.addEventListener(MediaEvent.COMPLETE, onCompleteGoal1);
+					Goal1Picture.filters = [];
+					myCam.launch(MediaType.IMAGE);
+				}
+				else currentState = "CameraNotSupported";
+			}			
+			
+			//   Goal 2   //
+			protected function Goal2PictureLibraryBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (CameraRoll.supportsBrowseForImage)
+				{					
+					roll = new CameraRoll();
+					roll.addEventListener(MediaEvent.SELECT,onMediaSelectPic2);
+					Goal2PictureLibraryBtn.addEventListener(MouseEvent.CLICK,onBrowse);   
+					
+				} 
+				else currentState = "CameraNotSupported";
+			}			
+			protected function Goal2PictureCameraBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (CameraUI.isSupported){
+					
+					myCam = new CameraUI();
+					myCam.addEventListener(MediaEvent.COMPLETE, onCompleteGoal2);
+					Goal2Picture.filters = [];
+					myCam.launch(MediaType.IMAGE);
+				}
+				else currentState = "CameraNotSupported";
+			}
+			
+			protected function Goal3PictureLibraryBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (CameraRoll.supportsBrowseForImage)
+				{					
+					roll = new CameraRoll();
+					roll.addEventListener(MediaEvent.SELECT,onMediaSelectPic3);
+					Goal3PictureLibraryBtn.addEventListener(MouseEvent.CLICK,onBrowse);   
+					
+				} 
+				else currentState = "CameraNotSupported";
+			}			
+			protected function Goal3PictureCameraBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (CameraUI.isSupported){
+					
+					myCam = new CameraUI();
+					myCam.addEventListener(MediaEvent.COMPLETE, onCompleteGoal3);
+					Goal3Picture.filters = [];
+					myCam.launch(MediaType.IMAGE);
+				}
+				else currentState = "CameraNotSupported";
+			}
+			
+			public function onMediaSelectPic1(event:MediaEvent):void
+			{
+				var mp:MediaPromise = event.data;
+				//				lblFile.text = mp.file.name + "\n" + mp.file.url;
+				//				lblFile.visible = true;
+				GoalsObject.Goal1ImageURL =  mp.file.url;
+				Goal1Picture.source = mp.file.url;
+				Goal1PictureMask.visible = true;
+				//GoalPicturesList.setItemAt(mp.file.url as String,0)['photo'];
+			}
+			public function onMediaSelectPic2(event:MediaEvent):void
+			{
+				var mp:MediaPromise = event.data;
+				//				lblFile.text = mp.file.name + "\n" + mp.file.url;
+				//				lblFile.visible = true;
+				GoalsObject.Goal2ImageURL =  mp.file.url;
+				Goal2Picture.source = mp.file.url;
+				Goal2PictureMask.visible = true;
+				//GoalPicturesList.setItemAt(mp.file.url as String,1)['photo'];
+			}	
+			public function onMediaSelectPic3(event:MediaEvent):void
+			{
+				var mp:MediaPromise = event.data;
+				//				lblFile.text = mp.file.name + "\n" + mp.file.url;
+				//				lblFile.visible = true;
+				GoalsObject.Goal3ImageURL =  mp.file.url;
+				Goal3Picture.source = mp.file.url;
+				Goal3PictureMask.visible = true;
+				//GoalPicturesList.setItemAt(mp.file.url as String,2)['photo'];
+			}	
+			protected function onBrowse(event:MouseEvent):void
+			{        
+				roll.browseForImage();         
+			}
+			
+			protected function onCompleteGoal1(evt:MediaEvent):void
+			{
+				GoalsObject.Goal1ImageURL =  evt.data.file.url
+				Goal1Picture.source = evt.data.file.url;
+				PhotoCallOutGoal1.closeDropDown();	
+				Goal1PictureMask.visible = true;
+			}			
+			protected function onCompleteGoal2(evt:MediaEvent):void
+			{
+				GoalsObject.Goal2ImageURL =  evt.data.file.url
+				Goal2Picture.source = evt.data.file.url;
+				PhotoCallOutGoal2.closeDropDown();		
+				Goal2PictureMask.visible = true;
+			}			
+			protected function onCompleteGoal3(evt:MediaEvent):void
+			{
+				GoalsObject.Goal3ImageURL =  evt.data.file.url
+				Goal3Picture.source = evt.data.file.url;
+				PhotoCallOutGoal3.closeDropDown();		
+				Goal3PictureMask.visible = true;
+			}			
+			
+			protected function Goal1SpinnerList_changeHandler(event:IndexChangeEvent):void
+			{
+				Goal1TitleSelection.text = Goal1SpinnerList.selectedItem['title'];
+				Goal1TitleSelection.alpha = 1;
+				GoalsObject.Goal1Title = Goal1SpinnerList.selectedItem['title'];				
+				Goal1SelectButton.closeDropDown();
+			}
+
+			protected function Goal2SpinnerList_changeHandler(event:IndexChangeEvent):void
+			{
+				Goal2TitleSelection.text = Goal2SpinnerList.selectedItem['title'];
+				Goal2TitleSelection.visible = true;
+				GoalsObject.Goal2Title = Goal2SpinnerList.selectedItem['title'];
+				Goal2CallOutButton.closeDropDown();
+			}
+			
+			protected function MapItButton_clickHandler(event:MouseEvent):void
+			{				
+				var closedGoalsIndex:int = new int();				
+				var openGoalsIndex:int = new int();
+				
+				if (GoalsObject.Goal1Data == null || GoalsObject.Goal2Data == null)
+				{
+					closedGoalsIndex = 0;				
+					openGoalsIndex = 0;
+				}
+				else
+				{
+					closedGoalsIndex = Goal1SpinnerList.selectedIndex; 				
+					openGoalsIndex = Goal2SpinnerList.selectedIndex; 
+				}
+				
+				GoalsObject.Goal1Data = GoalData.closedLifeGoalsList.getItemAt(closedGoalsIndex);
+				GoalsObject.Goal2Data = GoalData.openLifeGoalsList.getItemAt(openGoalsIndex);
+				GoalsObject.Goal3Data = GoalData.openLifeGoalsList.getItemAt(closedGoalsIndex);
+
+//				GoalsObject.Goal1Data = GoalData.closedLifeGoalsList.getItemAt(0);
+//				GoalsObject.Goal2Data = GoalData.openLifeGoalsList.getItemAt(1);
+//				GoalsObject.Goal3Data = GoalData.openLifeGoalsList.getItemAt(2);
+				
+				//trace(GoalsObject.Goal1Data['title']);				
+				navigator.pushView(views.MappingViewSlideShow, GoalsObject);				
+			}
+			
+			protected function Goal2TextInput_focusInHandler(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub				
+				Goal2TextInput.alpha = 1;
+			}			
+			
+			protected function Goal3TextInput_focusInHandler(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				Goal3TextInput.alpha = 1;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="Normal" /> 
+		<s:State name="CameraNotSupported" />
+	</s:states>
+	
+	<s:Label text="This device does not support browsing the CameraRoll or Camera UI." width="95%" includeIn="CameraNotSupported" />
+	
+	<s:Group id="GoalsGroup" includeIn="Normal" width="1280" height="707">
+		
+		<!-- Goal 1 -->
+		<s:Image id="ChooseGoalsBackground" x="0" y="0" source="assets/images/GoalScreen_752.jpg"/>
+		
+		<s:CalloutButton id="Goal1SelectButton" x="63" y="248" width="62" height="45" label="Select" alpha="0">
+			<s:calloutContent>
+				<s:SpinnerListContainer>
+					<s:SpinnerList id="Goal1SpinnerList" dataProvider="{GoalData.closedLifeGoalsList}" labelField="title" width="400" wrapElements="true" selectedIndex="0"
+								   change="Goal1SpinnerList_changeHandler(event)" >
+						
+					</s:SpinnerList>
+					<!-- old 
+					<s:SpinnerList id="Goal2SpinnerList" dataProvider="{Goal1SpinnerListContent}" width="300"
+					change="Goal2SpinnerList_changeHandler(event)" >
+					
+					</s:SpinnerList>
+					-->
+				</s:SpinnerListContainer>
+			</s:calloutContent>
+		</s:CalloutButton>	
+		
+		<s:Image id="Goal1Picture" x="860" y="156" width="180" height="190"
+				 source="assets/images/Photo-button.png"/>
+		<s:Image id="Goal1PictureMask" x="860" y="156" width="180" height="190"
+				 source="assets/images/Photo-mask.png" visible="false"/>
+	
+		<s:CalloutButton id="PhotoCallOutGoal1" x="879" y="192" width="133" height="110" alpha="0"
+						 label="Add Photo" calloutDestructionPolicy="never"
+						 horizontalPosition="after">
+			<s:calloutLayout>
+				<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" horizontalAlign="center" gap="5"/>
+			</s:calloutLayout>
+			<s:calloutContent>
+				<s:Button id="Goal1PictureLibraryBtn" label="Select from Library" width="200"
+						  click="Goal1PictureLibraryBtn_clickHandler(event)"/>
+				<s:Button id="Goal1PictureCameraBtn" label="Take picture" width="200"
+						  click="Goal1PictureCameraBtn_clickHandler(event)" />
+			</s:calloutContent>
+		</s:CalloutButton>		
+		
+		<s:Label id="Goal1TitleSelection" x="147" y="261" width="654" height="34" fontSize="20" backgroundColor="white" alpha="0"/>		
+		
+		<!-- Goal 2 -->
+		<s:CalloutButton id="Goal2CallOutButton" x="64" y="439" width="60" label="Select" alpha="0">
+			<s:calloutContent>
+				<s:SpinnerListContainer>
+					<s:SpinnerList id="Goal2SpinnerList" 
+								   dataProvider="{GoalData.openLifeGoalsList}" labelField="title" width="300" wrapElements="true" selectedIndex="0"
+								   change="Goal2SpinnerList_changeHandler(event)" >
+						
+					</s:SpinnerList>
+				</s:SpinnerListContainer>
+			</s:calloutContent>
+		</s:CalloutButton>		
+		
+		<s:Label id="Goal2TitleSelection" x="147" y="448" width="350" height="34" fontSize="20" backgroundColor="white" visible="false"/>
+		
+		<s:TextInput id="Goal2TextInput" x="542" y="443" width="278" height="40" fontSize="20" borderVisible="false" contentBackgroundColor="white" alpha="0"
+					 focusIn="Goal2TextInput_focusInHandler(event)"/>	
+		
+		<s:Image id="Goal2Picture" x="860" y="347" width="180" height="190"
+				 source="assets/images/Photo-button.png"/>
+		<s:Image id="Goal2PictureMask" x="860" y="347" width="180" height="190"
+				 source="assets/images/Photo-mask.png" visible="false"/>
+
+		<s:CalloutButton id="PhotoCallOutGoal2" x="878" y="382" width="134" height="111" alpha="0"
+						 label="Add Photo" calloutDestructionPolicy="never"
+						 horizontalPosition="after">
+			<s:calloutLayout>
+				<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" horizontalAlign="center" gap="5"/>
+			</s:calloutLayout>
+			<s:calloutContent>
+				<s:Button id="Goal2PictureLibraryBtn" label="Select from Library" width="200"
+						  click="Goal2PictureLibraryBtn_clickHandler(event)"/>
+				<s:Button id="Goal2PictureCameraBtn" label="Take picture" width="200"
+						  click="Goal2PictureCameraBtn_clickHandler(event)" />
+			</s:calloutContent>
+		</s:CalloutButton>	
+	
+		<s:TextInput id="Goal3TextInput" x="73" y="628" width="732" height="50" borderVisible="false" fontSize="20" visible="true" contentBackgroundColor="white" alpha="0"
+					 focusIn="Goal3TextInput_focusInHandler(event)"/>
+		
+		<s:Image id="Goal3Picture" x="860" y="537" width="180" height="190"
+				 source="assets/images/Photo-button.png"/>
+		<s:Image id="Goal3PictureMask" x="860" y="537" width="180" height="190"
+				 source="assets/images/Photo-mask.png" visible="false"/>
+		
+		<s:CalloutButton id="PhotoCallOutGoal3" x="879" y="573" width="131" height="110" alpha="0"
+						 label="Add Photo" calloutDestructionPolicy="never"
+						 horizontalPosition="before">
+			<s:calloutLayout>
+				<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" horizontalAlign="center" gap="5"/>
+			</s:calloutLayout>
+			<s:calloutContent>
+				<s:Button id="Goal3PictureLibraryBtn" label="Select from Library" width="200"
+						  click="Goal3PictureLibraryBtn_clickHandler(event)"/>
+				<s:Button id="Goal3PictureCameraBtn" label="Take picture" width="200"
+						  click="Goal3PictureCameraBtn_clickHandler(event)" />
+			</s:calloutContent>
+		</s:CalloutButton>	
+		
+		<s:Button id="MapItButton" x="1122" y="649" width="124" label="Map it!" alpha="0"
+				  click="MapItButton_clickHandler(event)"/>
+		
+		<s:Label id="WhiteRect1" x="860" y="509" width="180" height="40" backgroundColor="white"/>
+		<s:Label id="WhiteRect3" x="860" y="325" width="180" height="39" backgroundColor="white"/>
+		<s:Label id="WhiteRect4" x="860" y="153" width="180" backgroundColor="white"/>
+		
+	</s:Group>	
+	<s:Label id="WhiteRect2" x="860" y="514" width="38" backgroundColor="white"
+			 x.Normal="833" y.Normal="713" width.Normal="230" height.Normal="27"/>
+</s:View>

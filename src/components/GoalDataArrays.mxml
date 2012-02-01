@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="GoalDataArrays" actionBarVisible="false">
+	<fx:Declarations>
+		<s:ArrayCollection id="closedLifeGoalsList">
+			<fx:Object id="closedLifeGoal0" title="" Phy="0" Emo="0" Soc="0" Nut="0" Int ="0" />
+			<fx:Object id="closedLifeGoal1" title="I want to be able to walk around the house." Phy="5" Emo="3" Soc="1" Nut="1" Int ="1" />
+			<fx:Object id="closedLifeGoal2" title="I want to be able to play with my family." Phy="5" Emo="1" Soc="3" Nut="1" Int ="1" />
+			<fx:Object id="closedLifeGoal3" title="I want to connect regularly with friends and family." Phy="3" Emo="5" Soc="1" Nut="1" Int ="1" />
+			<fx:Object id="closedLifeGoal4" title="I want to attend religious service every week." Phy="1" Emo="5" Soc="1" Nut="1" Int ="1" />
+			<fx:Object id="closedLifeGoal5" title="I want to eat healthier according to my new diet." Phy="1" Emo="1" Soc="3" Nut="5" Int ="1" />
+			<fx:Object id="closedLifeGoal6" title="I want to remember to take my medication." Phy="1" Emo="3" Soc="1" Nut="5" Int ="1" />
+			<fx:Object id="closedLifeGoal7" title="I want to quit smoking." Phy="1" Emo="3" Soc="1" Nut="5" Int ="1" />
+			<fx:Object id="closedLifeGoal8" title="I want to cook my own meals." Phy="1" Emo="3" Soc="1" Nut="1" Int ="5" />
+			<fx:Object id="closedLifeGoal9" title="I want to clean the house or do the laundry." Phy="1" Emo="3" Soc="1" Nut="1" Int ="5" />
+			<fx:Object id="closedLifeGoal10" title="I want to manage the household finances." Phy="1" Emo="1" Soc="3" Nut="1" Int ="5" />
+		</s:ArrayCollection>
+		
+		<s:ArrayCollection id="openLifeGoalsList">
+			<fx:Object id="openLifeGoal0" title="" Phy="5" Emo="3" Soc="1" Nut="1" Int ="1" />
+			<fx:Object id="openLifeGoal1" title="I want to be able to do..." Phy="5" Emo="3" Soc="1" Nut="1" Int ="1" />
+			<fx:Object id="openLifeGoal2" title="I want to take a trip to..." Phy="5" Emo="1" Soc="3" Nut="1" Int ="1" />
+			<fx:Object id="openLifeGoal3" title="I want to spend more time with..." Phy="3" Emo="5" Soc="1" Nut="1" Int ="1" />
+			<fx:Object id="openLifeGoal4" title="I want to stay close to..." Phy="1" Emo="5" Soc="1" Nut="3" Int ="1" />
+			<fx:Object id="openLifeGoal5" title="I want to attend my..." Phy="3" Emo="1" Soc="5" Nut="1" Int ="1" />
+			<fx:Object id="openLifeGoal6" title="I want to eat..." Phy="1" Emo="1" Soc="3" Nut="5" Int ="1" />			
+			<fx:Object id="openLifeGoal7" title="I want to learn to..." Phy="1" Emo="1" Soc="3" Nut="1" Int ="5" />				
+		</s:ArrayCollection>
+		
+		<!-- testing
+		<s:ArrayCollection id="Goal1SpinnerListContent">
+			<fx:String> </fx:String>
+			<fx:String>I want to play with my grandson</fx:String>
+			<fx:String>I want to go to Paris</fx:String>
+			<fx:String>I want dance Salsa</fx:String>
+			<fx:String>Goal #4</fx:String>
+			<fx:String>Goal #5</fx:String>
+		</s:ArrayCollection>		
+		
+		<s:ArrayList id="GoalPicturesList" >			
+			<fx:Object label="1st" photo="" />
+			<fx:Object label="2st" photo="" />
+			<fx:Object label="3st" photo="" />
+		</s:ArrayList> 
+		-->
+	</fx:Declarations>
+</s:View>
